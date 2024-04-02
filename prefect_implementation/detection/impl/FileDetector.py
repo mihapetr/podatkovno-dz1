@@ -1,4 +1,4 @@
-import os
+# import os
 from typing import Set, Iterable
 from os import walk
 
@@ -20,11 +20,15 @@ class FileDetector(IDetectionAPI):
         Bonus: može se dodatno ubaciti filtriranje gdje će se vraćati samo određeni tip datoteka (npr. .mf4 u ovom slučaju)
         '''
 
-        res = []
+        res = list()
+        visited_files = list()
+
         for target in self.files_sources :
 
-            for (dirpath, dirnames, filenames) in walk(self.files_sources[0]) :
+            for (dirpath, dirnames, filenames) in walk(target) :
                 for name in filenames :
-                    if name[-4:] == ".mf4" : res.append( dirpath + "/" +  name)
+                    if name[-4:] == ".mf4" and name not in visited_files :
+                        res.append( dirpath + "/" + name)
+                        visited_files.append(name)
 
         return res

@@ -10,7 +10,7 @@ from processing.flow import processing_flow_logic
 from prefect_implementation.quality_check.impl.QualityCheck import QualityCheck
 
 file_source = "data"
-detection_api = FileDetector(files_sources=[file_source])
+detection_api = FileDetector(files_sources=[file_source, "data/test_input"])
 
 
 # @flow(log_prints=True)
